@@ -87,7 +87,6 @@
 				8019E3C91650ABA600383962 /* AppDelegate.m */,
 				8019E3D11650ABA600383962 /* ViewController.h */,
 				8019E3D21650ABA600383962 /* ViewController.m */,
-				8019E3D41650ABA600383962 /* ViewController.xib */,
 				8019E3C01650ABA600383962 /* Supporting Files */,
 			);
 			path = PHCollectionViewWaterflowLayout;
@@ -96,6 +95,7 @@
 		8019E3C01650ABA600383962 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8019E3D41650ABA600383962 /* ViewController.xib */,
 				8019E3C11650ABA600383962 /* PHCollectionViewWaterflowLayout-Info.plist */,
 				8019E3C21650ABA600383962 /* InfoPlist.strings */,
 				8019E3C51650ABA600383962 /* main.m */,
