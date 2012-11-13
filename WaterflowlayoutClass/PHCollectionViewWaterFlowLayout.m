@@ -34,14 +34,15 @@
 -(void)prepareLayout{
     [super prepareLayout];
     
-    //
+    //when there is no cellSizeArray, nothing to prepare
     if (!self.cellSizeArray || self.cellSizeArray.count==0) {
         return;
     }
     
     NSMutableArray* tempArray = [NSMutableArray array];
-    float columnHeight[self.numberOfColumn];//这种方法必须要初始化，要不然数值很诡异
+    float columnHeight[self.numberOfColumn];
     
+    //init to 0 height
     for (int i=0; i<=self.numberOfColumn-1; i++) {
         columnHeight[i] = 0.;
     }
@@ -55,13 +56,8 @@
         size.height = self.columnWidth * size.height / size.width;
         size.width = self.columnWidth;
         
-        //which column to add
-        int currentShortestColumn = 0;
-        for (int columnToCompare=1; columnToCompare<=self.numberOfColumn-1; columnToCompare++) {
-            if (columnHeight[columnToCompare] < columnHeight[currentShortestColumn]) {
-                currentShortestColumn = columnToCompare;
-            }
-        }
+        //find the shortest column to add imageview
+        int currentShortestColumn = [self indexOfMinValueOfArray:columnHeight withArrayLength:self.numberOfColumn];
 
         //add image to this column
         UICollectionViewLayoutAttributes* attributesForImage = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
@@ -73,15 +69,9 @@
     }
     
     //end up with calculating the max column height
-    //Problem 1:给定一个数组，告诉我哪一个index值最小
-    int currentlongestColumn = 0;
-    for (int columnToCompare=1; columnToCompare<=self.numberOfColumn-1; columnToCompare++) {
-        if (columnHeight[columnToCompare] > columnHeight[currentlongestColumn]) {
-            currentlongestColumn = columnToCompare;
-        }
-    }
-        
-    self.contentSize = CGSizeMake(CGRectGetWidth(self.collectionView.bounds), columnHeight[currentlongestColumn]+self.verticalSpacing);
+    CGFloat maxColumnHeight = [self maxValueOfArray:columnHeight withArrayLength:self.numberOfColumn];
+    
+    self.contentSize = CGSizeMake(CGRectGetWidth(self.collectionView.bounds), maxColumnHeight+self.verticalSpacing);
     
     self.layoutAttributesArray = [NSArray arrayWithArray:tempArray];
 }
@@ -108,6 +98,37 @@
     }
     
     return [NSArray arrayWithArray:intersectViewAtrributesArray];
+}
+
+#pragma mark - Private Methods
+-(int)indexOfMinValueOfArray:(float*)array withArrayLength:(int)length{
+    int indexOfMin;
+    for (int i=0; i<=length-1; i++) {
+        if (i==0) {
+            indexOfMin = 0;
+        }else{
+            if (array[i]<array[indexOfMin]) {
+                indexOfMin = i;
+            }
+        }
+    }
+    
+    return indexOfMin;
+}
+
+-(float)maxValueOfArray:(float*)array withArrayLength:(int)length{
+    float max;
+    for (int i=0; i<=length-1; i++) {
+        if (i==0) {
+            max = array[0];
+        }else{
+            if (array[i]>max) {
+                max = array[i];
+            }
+        }
+    }
+    
+    return max;
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "PHCollectionViewWaterFlowLayout.h"
 #import <PXAPI/PXAPI.h>
 #import "AsyncImageView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define CONSUMER_KEY @"b9tR1kc2KgFDqHYxRysdELK6qbE02ymTz4wZ3nn2"
 #define CONSUMER_SECRET @"6yLTkJA2bBrRmVQCBe7KxXam27q5RMZ17qhx1bqb"
@@ -106,6 +107,10 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
     return cell;
 }
 
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - CGRectGetHeight(scrollView.bounds) && !self.isLoading) {
@@ -131,6 +136,8 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
     if (self) {
         //
         self.backgroundColor = [UIColor whiteColor];
+        self.layer.borderWidth = 0.5;
+        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
         
         //add imageView
         self.imageView = [[AsyncImageView alloc] initWithFrame:CGRectZero];
@@ -167,10 +174,10 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
     cellHeight = CGRectGetMaxY(self.imageView.frame);
 
     //titleLabel
-    if (photo[@"description"]!=[NSNull null] && ![photo[@"description"] isEqualToString:@""]) {
-        CGSize titleSize = [photo[@"description"] sizeWithFont:[UIFont systemFontOfSize:TITLE_FONT_SIZE] constrainedToSize:CGSizeMake(90, 1000) lineBreakMode:NSLineBreakByWordWrapping];
+    if (photo[@"name"]!=[NSNull null] && ![photo[@"name"] isEqualToString:@""]) {
+        CGSize titleSize = [photo[@"name"] sizeWithFont:[UIFont systemFontOfSize:TITLE_FONT_SIZE] constrainedToSize:CGSizeMake(90, 1000) lineBreakMode:NSLineBreakByWordWrapping];
         self.titleLabel.frame = CGRectMake(5, cellHeight+5, 90, titleSize.height);
-        self.titleLabel.text = photo[@"description"];
+        self.titleLabel.text = photo[@"name"];
         cellHeight = CGRectGetMaxY(self.titleLabel.frame);
     }
     
@@ -184,8 +191,8 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
     CGSize imageViewSize = CGSizeMake(90, 90 * [photo[@"height"] floatValue] / [photo[@"width"] floatValue]);
     cellHeight = 5 + imageViewSize.height;
     
-    if (photo[@"description"]!=[NSNull null] && ![photo[@"description"] isEqualToString:@""]) {
-        CGSize titleSize = [photo[@"description"] sizeWithFont:[UIFont systemFontOfSize:TITLE_FONT_SIZE] constrainedToSize:CGSizeMake(90, 1000) lineBreakMode:NSLineBreakByWordWrapping];
+    if (photo[@"name"]!=[NSNull null] && ![photo[@"name"] isEqualToString:@""]) {
+        CGSize titleSize = [photo[@"name"] sizeWithFont:[UIFont systemFontOfSize:TITLE_FONT_SIZE] constrainedToSize:CGSizeMake(90, 1000) lineBreakMode:NSLineBreakByWordWrapping];
         cellHeight += 5 + titleSize.height;
     }
     

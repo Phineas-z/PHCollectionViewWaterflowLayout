@@ -58,7 +58,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FullyLoaded);
 }
 
 - (void)emptyCache {
-	NSLog(@"Emptying Cache");
 	[self.imageCache removeAllObjects];
 }
 

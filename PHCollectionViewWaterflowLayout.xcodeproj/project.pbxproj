@@ -50,6 +50,7 @@
 		8019E4221650CE7300383962 /* libPXAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8019E41F1650CE5300383962 /* libPXAPI.a */; };
 		8019E42E1650DAE200383962 /* GallaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8019E42D1650DAE200383962 /* GallaryViewController.m */; };
 		804FD80E1651EA970038B04C /* background@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 804FD80D1651EA970038B04C /* background@2X.png */; };
+		804FD81016521B4D0038B04C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 804FD80F16521B4D0038B04C /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		8019E42C1650DAE200383962 /* GallaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GallaryViewController.h; sourceTree = "<group>"; };
 		8019E42D1650DAE200383962 /* GallaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GallaryViewController.m; sourceTree = "<group>"; };
 		804FD80D1651EA970038B04C /* background@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2X.png"; sourceTree = "<group>"; };
+		804FD80F16521B4D0038B04C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				804FD81016521B4D0038B04C /* QuartzCore.framework in Frameworks */,
 				80080B671650EF9F000FB585 /* libz.1.2.5.dylib in Frameworks */,
 				80080B651650EF6F000FB585 /* MobileCoreServices.framework in Frameworks */,
 				80080B631650EF67000FB585 /* SystemConfiguration.framework in Frameworks */,
@@ -306,6 +309,7 @@
 		8019E3B81650ABA600383962 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				804FD80F16521B4D0038B04C /* QuartzCore.framework */,
 				80080B661650EF9F000FB585 /* libz.1.2.5.dylib */,
 				80080B641650EF6F000FB585 /* MobileCoreServices.framework */,
 				80080B621650EF67000FB585 /* SystemConfiguration.framework */,

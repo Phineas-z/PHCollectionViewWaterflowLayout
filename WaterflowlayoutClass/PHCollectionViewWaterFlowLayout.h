@@ -19,3 +19,9 @@
 @property (nonatomic) CGFloat verticalSpacing;
 
 @end
+
+@protocol PHCollectionViewWaterFlowLayoutDelegate <NSObject>
+@optional
+-(CGRect)waterflowLayoutFrameForLoadingMoreFooter:(PHCollectionViewWaterFlowLayout*)waterflowLayout;
+
+@end
