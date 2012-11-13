@@ -1,30 +1,29 @@
 //
-//  AppDelegate.m
-//  PHCollectionViewWaterflowLayout
+//  PXAppDelegate.m
+//  PXAPITest
 //
-//  Created by Appublisher  on 12-11-12.
-//  Copyright (c) 2012年 Appublisher . All rights reserved.
+//  Created by Ash Furrow on 2012-08-10.
+//  Copyright (c) 2012 500px. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "GallaryViewController.h"
+#import "PXAppDelegate.h"
 
-@implementation AppDelegate
+#import "PXMasterViewController.h"
+
+#import <PXAPI/PXAPI.h>
+
+@implementation PXAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-//    [PXRequest setConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET];
-//    
-//    [PXRequest requestForPhotoFeature:PXAPIHelperPhotoFeaturePopular resultsPerPage:20 page:1 photoSizes:PXPhotoModelSizeThumbnail completion:^(NSDictionary *results, NSError *error) {
-//        NSLog(@"result %@", results);
-//    }];
+    [PXRequest setConsumerKey:@"__CHANGE_ME__" consumerSecret:@"__CHANGE_ME__"];
     
-    self.gallaryViewController = [[GallaryViewController alloc] init];
-    self.window.rootViewController = self.gallaryViewController;
-    
+    PXMasterViewController *masterViewController = [[PXMasterViewController alloc] initWithNibName:@"PXMasterViewController" bundle:nil];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -37,7 +36,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
