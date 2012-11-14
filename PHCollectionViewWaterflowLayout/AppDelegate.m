@@ -14,13 +14,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    
-//    [PXRequest setConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET];
-//    
-//    [PXRequest requestForPhotoFeature:PXAPIHelperPhotoFeaturePopular resultsPerPage:20 page:1 photoSizes:PXPhotoModelSizeThumbnail completion:^(NSDictionary *results, NSError *error) {
-//        NSLog(@"result %@", results);
-//    }];
     
     self.gallaryViewController = [[GallaryViewController alloc] init];
     self.window.rootViewController = self.gallaryViewController;

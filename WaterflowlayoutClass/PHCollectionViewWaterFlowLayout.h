@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface  PHCollectionViewWaterFlowLayout: UICollectionViewFlowLayout
+@interface  PHCollectionViewWaterFlowLayout: UICollectionViewLayout
 
 @property (nonatomic) NSInteger numberOfColumn;
 
@@ -17,11 +17,5 @@
 @property (nonatomic) CGFloat columnWidth;
 
 @property (nonatomic) CGFloat verticalSpacing;
-
-@end
-
-@protocol PHCollectionViewWaterFlowLayoutDelegate <NSObject>
-@optional
--(CGRect)waterflowLayoutFrameForLoadingMoreFooter:(PHCollectionViewWaterFlowLayout*)waterflowLayout;
 
 @end

@@ -17,11 +17,13 @@
 #define CONSUMER_SECRET @"6yLTkJA2bBrRmVQCBe7KxXam27q5RMZ17qhx1bqb"
 
 static NSString* GallaryCellIdentifier = @"GallaryCell";
+static NSString* FooterIdentifier = @"Footer";
 
 @interface GallaryViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray* photoArray;
 @property (nonatomic, strong) UICollectionView* collectionView;
 @property (nonatomic, strong) PHCollectionViewWaterFlowLayout* waterflowLayout;
+@property (nonatomic, strong) UIActivityIndicatorView* spinner;
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic) BOOL isLoading;
 @end
@@ -55,6 +57,10 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
     
     [self fetchImageAtPage:self.currentPage andCount:20];
     
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.spinner.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2, CGRectGetHeight(self.view.bounds)-30);
+    [self.view addSubview:self.spinner];
+    
     //
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     self.collectionView.backgroundColor = [UIColor clearColor];
@@ -62,6 +68,7 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
 
 -(void)fetchImageAtPage:(NSInteger)page andCount:(NSInteger)count{
     self.isLoading = YES;
+    [self.spinner startAnimating];
     [PXRequest requestForPhotoFeature:PXAPIHelperPhotoFeaturePopular resultsPerPage:count page:page photoSizes:PXPhotoModelSizeLarge completion:^(NSDictionary *results, NSError *error) {
         //get photo
         [self.photoArray addObjectsFromArray:results[@"photos"]];
@@ -85,6 +92,7 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
         
         self.currentPage++;
         self.isLoading = NO;
+        [self.spinner stopAnimating];
     }];
 }
 
@@ -99,24 +107,24 @@ static NSString* GallaryCellIdentifier = @"GallaryCell";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     GallaryCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:GallaryCellIdentifier forIndexPath:indexPath];
-    
-//    [cell loadImage:((NSString*)self.photoArray[indexPath.row][@"image_url"][0])];
-    
+        
     [cell loadPhoto:self.photoArray[indexPath.row]];
     
     return cell;
 }
 
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    
-}
-
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - CGRectGetHeight(scrollView.bounds) && !self.isLoading) {
+        //fetch image
         [self fetchImageAtPage:self.currentPage andCount:20];
         NSLog(@"fectch page %d", self.currentPage);
     }
+}
+
+#pragma mark - PHCollectionViewWaterFlowLayoutDelegate
+-(CGFloat)waterFlowLayoutHeightForLoadingMoreFooter:(PHCollectionViewWaterFlowLayout *)waterflowLayout{
+    return 20;
 }
 
 @end

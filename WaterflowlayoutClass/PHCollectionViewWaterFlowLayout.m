@@ -60,10 +60,10 @@
         int currentShortestColumn = [self indexOfMinValueOfArray:columnHeight withArrayLength:self.numberOfColumn];
 
         //add image to this column
-        UICollectionViewLayoutAttributes* attributesForImage = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        UICollectionViewLayoutAttributes* attributesForCell = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         CGRect frame = CGRectMake(horizontal_spacing+(self.columnWidth+horizontal_spacing)*currentShortestColumn, columnHeight[currentShortestColumn]+self.verticalSpacing, size.width, size.height);
-        attributesForImage.frame = frame;
-        [tempArray addObject:attributesForImage];
+        attributesForCell.frame = frame;
+        [tempArray addObject:attributesForCell];
         //update shortest column height
         columnHeight[currentShortestColumn] += size.height+self.verticalSpacing;
     }
